@@ -18,45 +18,49 @@ import estrela from './../../assets/images/estrela.png'
 import { Link } from 'react-router-dom'
 
 type Props = {
-  prato: string
-  imagem: string
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
   descricao: string
-  destaque?: string
-  culinaria: string
-  nota: string
+  capa: string
 }
 
 const Produto = ({
-  prato,
-  imagem,
+  id,
+  titulo,
+  destacado,
+  tipo,
+  avaliacao,
   descricao,
-  destaque,
-  culinaria,
-  nota,
-}: Props) => (
-  <Card>
-    <Container>
-      <ImgPrato style={{ backgroundImage: `url(${imagem})` }}>
-        <DivTag>
-          {destaque && <Tag>{destaque}</Tag>}
-          <Tag>{culinaria}</Tag>
-        </DivTag>
-      </ImgPrato>
-      <Borda>
-        <ContainerPrato>
-          <Titulo>{prato}</Titulo>
-          <Avaliacao>
-            <Nota>{nota}</Nota>
-            <ImgEstrela src={estrela} alt="Estrela de avaliação" />
-          </Avaliacao>
-        </ContainerPrato>
-        <Descricao>{descricao}</Descricao>
-        <Link to="/restaurantes">
-          <Botao>Saiba mais</Botao>
-        </Link>
-      </Borda>
-    </Container>
-  </Card>
-)
+  capa,
+}: Props) => {
+  return (
+    <Card>
+      <Container>
+        <ImgPrato style={{ backgroundImage: `url(${capa})` }}>
+          <DivTag>
+            {destacado && <Tag>Destaque da semana</Tag>}
+            <Tag>{tipo}</Tag>
+          </DivTag>
+        </ImgPrato>
+        <Borda>
+          <ContainerPrato>
+            <Titulo>{titulo}</Titulo>
+            <Avaliacao>
+              <Nota>{avaliacao}</Nota>
+              <ImgEstrela src={estrela} alt="Estrela de avaliação" />
+            </Avaliacao>
+          </ContainerPrato>
+          <Descricao>{descricao}</Descricao>
+          <Link to={`/restaurantes/${id}`}>
+            <Botao>Saiba mais</Botao>
+          </Link>
+        </Borda>
+      </Container>
+    </Card>
+  )
+}
 
 export default Produto

@@ -5,17 +5,26 @@ import {
   NomeRestaurante,
   Titulos,
 } from './style'
-import ImagemPrato from './../../assets/images/image1.png'
+import { restauranteData } from '../../pages/Restaurantes'
 
-const Banner = () => (
-  <BannerImg style={{ backgroundImage: `url(${ImagemPrato})` }}>
-    <Container>
-      <Titulos>
-        <Culinaria>Italiana</Culinaria>
-        <NomeRestaurante>La Dolce Vita Trattoria</NomeRestaurante>
-      </Titulos>
-    </Container>
-  </BannerImg>
-)
+type BannerProps = {
+  restaurante: restauranteData | undefined
+}
 
+const Banner = ({ restaurante }: BannerProps) => {
+  return (
+    <BannerImg
+      style={{
+        backgroundImage: `url(${restaurante?.capa})`,
+      }}
+    >
+      <Container>
+        <Titulos>
+          <Culinaria>{restaurante?.tipo}</Culinaria>
+          <NomeRestaurante>{restaurante?.titulo}</NomeRestaurante>
+        </Titulos>
+      </Container>
+    </BannerImg>
+  )
+}
 export default Banner

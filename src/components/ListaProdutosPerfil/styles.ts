@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: center;
   padding: 56px 171px 120px 171px;
 `
-export const Cardapio = styled.div`
+export const Lista = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px;

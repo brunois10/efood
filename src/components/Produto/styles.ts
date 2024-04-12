@@ -5,12 +5,15 @@ export const Card = styled.div`
   width: 472px;
   color: ${cores.vermelho};
   margin-bottom: 48px;
+  min-height: 398px;
 `
 export const ImgPrato = styled.div`
   width: 472px;
   height: 217px;
   position: relative;
   display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 export const DivTag = styled.div`
   display: flex;
@@ -56,7 +59,8 @@ export const ImgEstrela = styled.img`
 
 export const Titulo = styled.h3`
   font-size: 18px;
-  padding: 8px 7px;
+
+  margin: 8px 7px 16px 7px;
 `
 export const Nota = styled.h3`
   font-size: 18px;
@@ -64,7 +68,13 @@ export const Nota = styled.h3`
 
 export const Descricao = styled.p`
   font-size: 14px;
-  padding: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  padding: 0px 8px;
+  line-height: 22px;
+  font-weight: 400;
 `
 export const Botao = styled.button`
   width: 82px;
@@ -75,6 +85,6 @@ export const Botao = styled.button`
   font-size: 14px;
   font-weight: 700;
   text-align: center;
-  margin: 8px;
+  margin: 16px 8px 8px 8px;
   cursor: pointer;
 `
