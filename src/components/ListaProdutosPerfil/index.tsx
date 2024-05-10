@@ -1,8 +1,6 @@
 import { Container, Lista } from './styles'
 import ProdutoPerfil from '../ProdutosPerfil'
 
-import { restauranteData } from '../../pages/Restaurantes'
-
 export type Props = {
   perfils: restauranteData | undefined
 }
@@ -21,6 +19,7 @@ const Perfil = ({ perfils }: Props) => (
               preco={perfil.preco}
               porcao={perfil.porcao}
               visivel={false}
+              prato={perfil}
             />
           </li>
         ))}

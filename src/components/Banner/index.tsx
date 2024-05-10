@@ -5,7 +5,6 @@ import {
   NomeRestaurante,
   Titulos,
 } from './style'
-import { restauranteData } from '../../pages/Restaurantes'
 
 type BannerProps = {
   restaurante: restauranteData | undefined

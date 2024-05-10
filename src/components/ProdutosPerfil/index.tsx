@@ -15,6 +15,10 @@ import {
 } from './styles'
 import close from '../../assets/images/fechar.png'
 
+import { add, open } from '../../store/reducers/cart'
+import { useDispatch } from 'react-redux'
+import { formataPreco } from '../../utils'
+
 type Props = {
   id: number
   preco?: number
@@ -23,21 +27,29 @@ type Props = {
   nome: string
   descricao: string
   visivel: boolean
+  prato: CardapioType
 }
 
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(preco)
-}
-
-const ProdutoPerfil = ({ foto, nome, descricao, porcao, preco }: Props) => {
+const ProdutoPerfil = ({
+  foto,
+  nome,
+  descricao,
+  porcao,
+  preco,
+  prato,
+}: Props) => {
   const [modal, setModal] = useState({
     visivel: false,
   })
 
+  const dispatch = useDispatch()
+
   const handleModal = () => setModal({ visivel: false })
+
+  const addCart = () => {
+    dispatch(add(prato))
+    dispatch(open())
+  }
 
   return (
     <>
@@ -61,7 +73,14 @@ const ProdutoPerfil = ({ foto, nome, descricao, porcao, preco }: Props) => {
             <h4>{nome}</h4>
             <p>{descricao}</p>
             <p>Serve: de {porcao}</p>
-            <button>Adicionar ao carrinho - {formataPreco(preco)}</button>
+            <button
+              onClick={() => {
+                addCart()
+                handleModal()
+              }}
+            >
+              Adicionar ao carrinho - {formataPreco(preco)}
+            </button>
           </TextBox>
         </ModalContent>
         <Overlay
