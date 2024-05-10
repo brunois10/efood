@@ -18,7 +18,7 @@ export const CartContainer = styled.div`
 `
 
 export const Overlay = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -29,12 +29,12 @@ export const Overlay = styled.div`
 `
 
 export const SideBar = styled.aside`
-  position: absolute;
   z-index: 1;
   padding: 32px 8px 16px 8px;
   max-width: 360px;
   width: 100%;
   background-color: ${cores.vermelho};
+  height: 100%;
 `
 
 export const Card = styled.li`
