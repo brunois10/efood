@@ -15,18 +15,19 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<CardapioType>) => {
-      const restaurante = state.items.find(
-        (item) => item.id === action.payload.id,
-      )
-
-      if (!restaurante) {
-        state.items.push(action.payload)
-      } else {
-        alert('O lanche já está no carrinho')
-      }
+      state.items.push(action.payload)
     },
     remove: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload)
+      let removed = false
+      const updatedCart = state.items.filter((item) => {
+        if (!removed && item.id === action.payload) {
+          removed = true
+          return false
+        }
+        return true
+      })
+      state.items = updatedCart
+      console.log(state.items)
     },
     open: (state) => {
       state.isOpen = true

@@ -10,11 +10,17 @@ export const CartContainer = styled.div`
   display: none;
   justify-content: flex-end;
   z-index: 1;
-  overflow-y: auto;
 
   &.is-open {
     display: flex;
   }
+`
+
+export const Teste = styled.div`
+  max-height: 380px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 100%;
 `
 
 export const Overlay = styled.div`
@@ -30,7 +36,7 @@ export const Overlay = styled.div`
 
 export const SideBar = styled.aside`
   z-index: 1;
-  padding: 32px 8px 16px 8px;
+  padding: 32px 0px 16px 8px;
   max-width: 360px;
   width: 100%;
   background-color: ${cores.vermelho};
@@ -81,7 +87,7 @@ export const Description = styled.div`
 export const Prices = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 24px 0 16px 0;
+  padding: 24px 8px 16px 0;
   color: ${cores.bege};
 
   p {

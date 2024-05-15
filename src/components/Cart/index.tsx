@@ -12,6 +12,7 @@ import {
   Overlay,
   Prices,
   SideBar,
+  Teste,
 } from './styles'
 
 import { getTotalPrice } from '../../utils'
@@ -34,20 +35,22 @@ const Cart = () => {
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />
       <SideBar>
-        {items.map((item) => (
-          <Card key={item.id}>
-            <ImageFood src={item.foto} alt={item.nome} />
-            <Description>
-              <h3>{item.nome}</h3>
-              <span>R$ {item.preco}</span>
-            </Description>
-            <ButtonTrash
-              onClick={() => removeItem(item.id)}
-              src={Trash}
-              alt="Lixo"
-            />
-          </Card>
-        ))}
+        <Teste>
+          {items.map((item) => (
+            <Card key={item.id}>
+              <ImageFood src={item.foto} alt={item.nome} />
+              <Description>
+                <h3>{item.nome}</h3>
+                <span>R$ {item.preco}</span>
+              </Description>
+              <ButtonTrash
+                onClick={() => removeItem(item.id)}
+                src={Trash}
+                alt="Lixo"
+              />
+            </Card>
+          ))}
+        </Teste>
         <Prices>
           <p>Valor total</p>
           <p>R$ {getTotalPrice(items)}</p>
