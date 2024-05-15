@@ -16,6 +16,7 @@ const cartSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<CardapioType>) => {
       state.items.push(action.payload)
+      console.log(state.items)
     },
     remove: (state, action: PayloadAction<number>) => {
       let removed = false
@@ -31,9 +32,11 @@ const cartSlice = createSlice({
     },
     open: (state) => {
       state.isOpen = true
+      console.log(state.items)
     },
     close: (state) => {
       state.isOpen = false
+      console.log(state.items)
     },
   },
 })
