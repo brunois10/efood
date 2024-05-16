@@ -1,16 +1,15 @@
-import { Restaurante } from '../../pages/Home'
 import Produto from '../Produto'
 import { Cardapio, Container } from './styles'
 
 type Props = {
-  restaurantes: Restaurante[]
+  restaurants: restauranteData[]
 }
 
-const ListaDeProduto = ({ restaurantes }: Props) => (
+const ListaDeProduto = ({ restaurants }: Props) => (
   <>
     <Container>
       <Cardapio>
-        {restaurantes.map((restaurante) => (
+        {restaurants.map((restaurante) => (
           <Produto
             key={restaurante.id}
             id={restaurante.id}

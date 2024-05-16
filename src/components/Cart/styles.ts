@@ -117,3 +117,17 @@ export const BuyButton = styled.button`
   background-color: ${cores.bege};
   color: ${cores.vermelho};
 `
+export const VoidCart = styled.p`
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: start;
+  color: ${cores.bege};
+`
+export const CartBuy = styled.div`
+  display: block;
+
+  &.is-cartbuy {
+    display: none;
+  }
+`

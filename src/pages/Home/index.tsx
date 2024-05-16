@@ -1,33 +1,21 @@
+import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import ListaDeProduto from '../../components/ListaDeProduto'
 
-import { useEffect, useState } from 'react'
-
-export type Restaurante = {
-  id: number
-  titulo: string
-  destacado: boolean
-  tipo: string
-  avaliacao: number
-  descricao: string
-  capa: string
-}
+import { useGetRestaurantesQuery } from '../../services/api'
 
 const Home = () => {
-  const [destaques, setDestaques] = useState<Restaurante[]>([])
+  const { data: restaurants } = useGetRestaurantesQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setDestaques(res))
-  }, [])
-
-  return (
-    <>
-      <Header />
-      <ListaDeProduto restaurantes={destaques} />
-    </>
-  )
+  if (restaurants) {
+    return (
+      <>
+        <Header />
+        <ListaDeProduto restaurants={restaurants} />
+      </>
+    )
+  }
+  return <Footer />
 }
 
 export default Home
