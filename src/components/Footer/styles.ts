@@ -19,7 +19,7 @@ export const ContainerRedes = styled.div`
   display: flex;
   justify-content: center;
   gap: 8px;
-  width: 539px;
+  width: 100%;
 `
 
 export const RedesSociais = styled.img`

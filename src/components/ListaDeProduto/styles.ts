@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.section`
   width: 100%;
@@ -14,4 +14,12 @@ export const Cardapio = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 80px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `

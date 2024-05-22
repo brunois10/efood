@@ -1,6 +1,6 @@
-import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import ListaDeProduto from '../../components/ListaDeProduto'
+import Loader from '../../components/Loader'
 
 import { useGetRestaurantesQuery } from '../../services/api'
 
@@ -15,7 +15,7 @@ const Home = () => {
       </>
     )
   }
-  return <Footer />
+  return <Loader />
 }
 
 export default Home

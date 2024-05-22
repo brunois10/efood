@@ -1,5 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px',
+}
+
 export const GlobalCss = createGlobalStyle`
 * {
     margin: 0;
@@ -9,11 +14,22 @@ export const GlobalCss = createGlobalStyle`
     list-style: none;
 }
 
-  .container {
-    display: flex;
+.container {
+  display: flex;
+  justify-content: center;
+  width: 539px;
+
+  @media (max-width: ${breakpoints.desktop}) {
     justify-content: center;
-    width: 539px;
+    align-items: center;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 360px;
+    justify-content: center;
+    align-items: center;
+  }
+}
 `
 
 export const cores = {

@@ -15,7 +15,7 @@ const Footer = () => (
     <div className="container">
       <LogoImg src={logo} alt="Logo efood" />
     </div>
-    <ContainerRedes>
+    <ContainerRedes className="container">
       <RedesSociais src={instagram} alt="Logo do instagram" />
       <RedesSociais src={facebook} alt="Logo do facebook" />
       <RedesSociais src={twitter} alt="Logo do twitter" />

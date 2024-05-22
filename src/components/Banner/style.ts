@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const BannerImg = styled.div`
   width: 100%;
@@ -23,6 +23,10 @@ export const Titulos = styled.div`
   align-items: center;
   gap: 156.5px;
   padding: 25px 0px 32px 0px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 80%;
+  }
 `
 
 export const Culinaria = styled.h3`

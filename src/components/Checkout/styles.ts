@@ -38,6 +38,10 @@ export const ContainerButton = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+
+  &.error {
+    border: 1px solid red;
+  }
 `
 
 export const ButtonCart = styled.button`

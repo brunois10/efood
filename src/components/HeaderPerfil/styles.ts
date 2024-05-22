@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Fundo = styled.div`
   width: 100%;
@@ -14,11 +14,33 @@ export const Container = styled.div`
   padding: 82px 171px;
   color: ${cores.vermelho};
   height: 186px;
+  width: 100%;
 `
 export const Header = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 1024px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 80%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 60%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+  }
 `
 
 export const LogoImg = styled.img`
@@ -26,6 +48,12 @@ export const LogoImg = styled.img`
   height: 58px;
   margin-left: 341px;
   margin-right: 193px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+  }
 `
 export const Restaurante = styled.h2`
   font-size: 18px;
@@ -33,6 +61,13 @@ export const Restaurante = styled.h2`
   width: 109px;
   height: 21px;
   text-align: center;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
 `
 export const Carrinho = styled.h2`
   font-size: 18px;
@@ -40,4 +75,11 @@ export const Carrinho = styled.h2`
   width: 256px;
   font-weight: 900;
   height: 21px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
 `

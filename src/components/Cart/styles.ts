@@ -69,7 +69,7 @@ export const Description = styled.div`
   margin-top: 8px;
 
   h3 {
-    width: 140px;
+    width: 224px;
     font-size: 18px;
     line-height: 21px;
     text-align: start;
@@ -100,7 +100,7 @@ export const Prices = styled.div`
 export const ButtonTrash = styled.img`
   width: 16px;
   height: 16px;
-  margin: 76px 8px 8px 84px;
+  margin: 76px 8px 8px 0px;
   cursor: pointer;
 `
 
