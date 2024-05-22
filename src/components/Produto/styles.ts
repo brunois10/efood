@@ -1,16 +1,20 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 472px;
+  max-width: 472px;
+  width: 100%;
   color: ${cores.vermelho};
   margin-bottom: 48px;
-  min-height: 398px;
+  justify-content: center;
+  align-items: center;
+  min-width: 260px;
 `
 export const ImgPrato = styled.div`
-  width: 472px;
-  height: 217px;
-  position: relative;
+  max-width: 472px;
+  width: 100%;
+  min-height: 217px;
+  height: 100%;
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
@@ -31,10 +35,15 @@ export const Tag = styled.div`
   display: flex;
   align-items: center;
   padding: 6px 4px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 24px 6px;
+  }
 `
 
 export const Container = styled.div`
   background-color: ${cores.branco};
+  width: 100%;
 `
 export const Borda = styled.div`
   border-left: 1px solid ${cores.vermelho};
@@ -43,7 +52,8 @@ export const Borda = styled.div`
 `
 
 export const ContainerPrato = styled.div`
-  width: 472px;
+  max-width: 472px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `

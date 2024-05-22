@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -20,7 +20,7 @@ export const Teste = styled.div`
   max-height: 380px;
   overflow-y: auto;
   overflow-x: hidden;
-  max-width: 100%;
+  width: 100%;
 `
 
 export const Overlay = styled.div`
@@ -41,14 +41,25 @@ export const SideBar = styled.aside`
   width: 100%;
   background-color: ${cores.vermelho};
   height: 100%;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 300px;
+  }
 `
 
 export const Card = styled.li`
-  width: 344px;
-  height: 100px;
+  max-width: 344px;
+  width: 100%;
+  max-height: 100px;
+  height: 100%;
   display: flex;
   background-color: ${cores.bege};
   margin-bottom: 16px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 280px;
+    max-height: 350px;
+  }
 
   button {
     width: 16px;
@@ -69,18 +80,27 @@ export const Description = styled.div`
   margin-top: 8px;
 
   h3 {
-    width: 224px;
+    max-width: 224px;
+    width: 100%;
     font-size: 18px;
     line-height: 21px;
     text-align: start;
     font-weight: 900;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      font-size: 14px;
+    }
   }
 
   span {
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      font-size: 10px;
+    }
   }
 `
 
@@ -89,6 +109,10 @@ export const Prices = styled.div`
   justify-content: space-between;
   padding: 24px 8px 16px 0;
   color: ${cores.bege};
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding-right: 16px;
+  }
 
   p {
     font-size: 14px;
@@ -102,6 +126,10 @@ export const ButtonTrash = styled.img`
   height: 16px;
   margin: 76px 8px 8px 0px;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin: 10px;
+  }
 `
 
 export const BuyButton = styled.button`
@@ -116,6 +144,10 @@ export const BuyButton = styled.button`
   text-align: center;
   background-color: ${cores.bege};
   color: ${cores.vermelho};
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 280px;
+  }
 `
 export const VoidCart = styled.p`
   font-size: 14px;

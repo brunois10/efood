@@ -27,7 +27,8 @@ export const RedesSociais = styled.img`
   height: 24px;
 `
 export const FooterTexto = styled.h2`
-  width: 480px;
+  max-width: 480px;
+  width: 100%;
   font-weight: 400;
   font-size: 10px;
   line-height: 11.75px;

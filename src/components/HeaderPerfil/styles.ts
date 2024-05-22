@@ -15,31 +15,26 @@ export const Container = styled.div`
   color: ${cores.vermelho};
   height: 186px;
   width: 100%;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `
 export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1024px;
+  max-width: 1024px;
+  width: 100%;
 
   @media (max-width: ${breakpoints.desktop}) {
-    width: 80%;
     display: grid;
     align-items: center;
     justify-content: center;
     text-align: center;
     grid-template-columns: 1fr;
     grid-gap: 10px;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 60%;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    grid-template-columns: 1fr;
-    grid-gap: 15px;
   }
 `
 

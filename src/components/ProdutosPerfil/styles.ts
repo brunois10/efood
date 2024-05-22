@@ -2,14 +2,16 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 export const Card = styled.div`
-  width: 320px;
+  max-width: 320px;
+  width: 100%;
   height: 338px;
   color: ${cores.bege};
   background-color: ${cores.vermelho};
   padding: 8px;
 `
 export const ImgPrato = styled.img`
-  width: 304px;
+  max-width: 304px;
+  width: 100%;
   height: 167px;
   background-color: ${cores.vermelho};
 `
@@ -30,7 +32,8 @@ export const Titulo = styled.h3`
 
 export const Descricao = styled.p`
   margin-top: 8px;
-  width: 304px;
+  max-width: 304px;
+  width: 100%;
   height: 88px;
   font-size: 14px;
   font-weight: 400;
@@ -46,7 +49,8 @@ export const ContainerBotao = styled.div`
 `
 
 export const Botao = styled.button`
-  width: 304px;
+  max-width: 304px;
+  width: 100%;
   height: 24px;
   background-color: ${cores.bege};
   border: none;
@@ -79,11 +83,13 @@ export const ModalContent = styled.div`
   background-color: ${cores.vermelho};
   color: ${cores.branco};
   z-index: 2;
-  width: 1024px;
+  max-width: 1024px;
+  width: 100%;
   height: 344px;
 
   .imgComida {
-    width: 280px;
+    max-width: 280px;
+    width: 100%;
     height: 280px;
     object-fit: cover;
     margin-right: 24px;

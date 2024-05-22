@@ -1,5 +1,5 @@
 import Produto from '../Produto'
-import { Cardapio, Container } from './styles'
+import { Background, Cardapio, Container } from './styles'
 
 type Props = {
   restaurants: restauranteData[]
@@ -7,22 +7,24 @@ type Props = {
 
 const ListaDeProduto = ({ restaurants }: Props) => (
   <>
-    <Container>
-      <Cardapio>
-        {restaurants.map((restaurante) => (
-          <Produto
-            key={restaurante.id}
-            id={restaurante.id}
-            titulo={restaurante.titulo}
-            destacado={restaurante.destacado}
-            tipo={restaurante.tipo}
-            avaliacao={restaurante.avaliacao}
-            descricao={restaurante.descricao}
-            capa={restaurante.capa}
-          />
-        ))}
-      </Cardapio>
-    </Container>
+    <Background>
+      <Container>
+        <Cardapio>
+          {restaurants.map((restaurante) => (
+            <Produto
+              key={restaurante.id}
+              id={restaurante.id}
+              titulo={restaurante.titulo}
+              destacado={restaurante.destacado}
+              tipo={restaurante.tipo}
+              avaliacao={restaurante.avaliacao}
+              descricao={restaurante.descricao}
+              capa={restaurante.capa}
+            />
+          ))}
+        </Cardapio>
+      </Container>
+    </Background>
   </>
 )
 

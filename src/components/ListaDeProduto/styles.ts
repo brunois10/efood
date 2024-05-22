@@ -2,12 +2,34 @@ import styled from 'styled-components'
 import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.section`
-  width: 100%;
-  background-color: ${cores.corFundo};
+  max-width: 1024px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 171px 120px 171px;
+  width: 100%;
+  padding: 80px 0px 120px 0px;
+  margin: auto;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding-left: 24px;
+    padding-right: 24px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding-left: 24px;
+    padding-right: 24px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+`
+
+export const Background = styled.div`
+  background-color: ${cores.corFundo};
+  width: 100%;
 `
 
 export const Cardapio = styled.ul`
@@ -17,9 +39,8 @@ export const Cardapio = styled.ul`
 
   @media (max-width: ${breakpoints.desktop}) {
     grid-template-columns: 1fr;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 `

@@ -1,4 +1,4 @@
-import { Container, Lista } from './styles'
+import { Background, Container, Lista } from './styles'
 import ProdutoPerfil from '../ProdutosPerfil'
 
 export type Props = {
@@ -7,24 +7,26 @@ export type Props = {
 
 const Perfil = ({ perfils }: Props) => (
   <>
-    <Container>
-      <Lista>
-        {perfils?.cardapio.map((perfil) => (
-          <li key={perfil.id}>
-            <ProdutoPerfil
-              nome={perfil.nome}
-              foto={perfil.foto}
-              descricao={perfil.descricao}
-              id={perfil.id}
-              preco={perfil.preco}
-              porcao={perfil.porcao}
-              visivel={false}
-              prato={perfil}
-            />
-          </li>
-        ))}
-      </Lista>
-    </Container>
+    <Background>
+      <Container>
+        <Lista>
+          {perfils?.cardapio.map((perfil) => (
+            <li key={perfil.id}>
+              <ProdutoPerfil
+                nome={perfil.nome}
+                foto={perfil.foto}
+                descricao={perfil.descricao}
+                id={perfil.id}
+                preco={perfil.preco}
+                porcao={perfil.porcao}
+                visivel={false}
+                prato={perfil}
+              />
+            </li>
+          ))}
+        </Lista>
+      </Container>
+    </Background>
   </>
 )
 

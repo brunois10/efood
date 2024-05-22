@@ -17,18 +17,8 @@ export const GlobalCss = createGlobalStyle`
 .container {
   display: flex;
   justify-content: center;
-  width: 539px;
-
-  @media (max-width: ${breakpoints.desktop}) {
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    width: 360px;
-    justify-content: center;
-    align-items: center;
-  }
+  max-width: 539px;
+  width: 100%;
 }
 `
 
@@ -40,6 +30,5 @@ export const cores = {
 }
 
 export const Container = styled.div`
-  width: 1366px;
   width: 100%;
 `

@@ -3,7 +3,8 @@ import { breakpoints, cores } from '../../styles'
 
 export const BannerImg = styled.div`
   width: 100%;
-  height: 280px;
+  max-height: 280px;
+  height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,7 +18,8 @@ export const Container = styled.main`
 `
 
 export const Titulos = styled.div`
-  width: 1024px;
+  max-width: 1024px;
+  width: 100%;
   color: ${cores.branco};
   display: grid;
   align-items: center;
@@ -25,7 +27,7 @@ export const Titulos = styled.div`
   padding: 25px 0px 32px 0px;
 
   @media (max-width: ${breakpoints.desktop}) {
-    width: 80%;
+    padding-left: 24px;
   }
 `
 
@@ -35,7 +37,8 @@ export const Culinaria = styled.h3`
   line-height: 37.5px;
 `
 export const NomeRestaurante = styled.h4`
-  width: 676px;
+  max-width: 676px;
+  width: 100%;
   font-size: 32px;
   line-height: 38px;
   font-weight: 900;
