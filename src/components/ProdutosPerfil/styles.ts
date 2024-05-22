@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
   max-width: 320px;
@@ -87,12 +87,23 @@ export const ModalContent = styled.div`
   width: 100%;
   height: 344px;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 360px;
+    height: 380px;
+    padding: 12px;
+  }
+
   .imgComida {
     max-width: 280px;
     width: 100%;
     height: 280px;
     object-fit: cover;
     margin-right: 24px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 150px;
+      margin-right: 12px;
+    }
   }
 
   h4 {
@@ -100,6 +111,10 @@ export const ModalContent = styled.div`
     font-weight: 900;
     line-height: 21px;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      font-size: 12px;
+    }
   }
 
   p {
@@ -107,6 +122,10 @@ export const ModalContent = styled.div`
     font-weight: 400;
     line-height: 22px;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      font-size: 10px;
+    }
   }
 `
 
@@ -126,12 +145,18 @@ export const TextBox = styled.div`
   button {
     background-color: ${cores.bege};
     color: ${cores.vermelho};
-    width: 218px;
+    max-width: 218px;
+    width: 100%;
     font-size: 14px;
     font-weight: 700;
     border: none;
     cursor: pointer;
     padding: 4px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 150px;
+      font-size: 10px;
+    }
   }
 `
 

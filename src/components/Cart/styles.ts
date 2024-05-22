@@ -80,8 +80,7 @@ export const Description = styled.div`
   margin-top: 8px;
 
   h3 {
-    max-width: 224px;
-    width: 100%;
+    width: 224px;
     font-size: 18px;
     line-height: 21px;
     text-align: start;
@@ -90,6 +89,7 @@ export const Description = styled.div`
 
     @media (max-width: ${breakpoints.desktop}) {
       font-size: 14px;
+      width: 150px;
     }
   }
 
