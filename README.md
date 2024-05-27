@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# Efood
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/brunois10/efood/blob/main/LICENSE) 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Sobre o projeto
 
-Currently, two official plugins are available:
+https://efood-liart-six.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Efood é uma aplicação front-end e mobile desenvolvida como projeto final do front-end do curso profissionalizante de Full Stack da EBAC. Esta aplicação permite aos usuários pesquisar restaurantes, cujos dados são obtidos a partir de uma API.
 
-## Expanding the ESLint configuration
+Principais funcionalidades:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Pesquisa de Restaurantes: Os usuários podem pesquisar uma variedade de restaurantes, com os dados apresentados de forma clara e organizada.
 
-- Configure the top-level `parserOptions` property like this:
+Detalhes do Restaurante: Ao clicar em "Saber Mais" sobre um restaurante, os usuários podem visualizar o cardápio completo do estabelecimento.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Carrinho de Compras: Após selecionar os itens desejados do cardápio, os usuários são redirecionados para o carrinho, onde podem finalizar a compra online.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Entrega em Domicílio: Os pedidos realizados são enviados diretamente para a casa do usuário, proporcionando uma experiência de compra conveniente e eficiente.
+
+Efood combina a facilidade de uso de uma aplicação front-end com a versatilidade de uma plataforma mobile, oferecendo uma solução completa para a pesquisa e pedido de refeições online.
+
+## Layout web
+![Web 1](https://github.com/brunois10/efood/blob/main/src/assets/images/Layout.png)
+
+
+# Tecnologias utilizadas
+## Front end
+- ReactJS
+- TypeScript
+- Redux
+- Styled Components
+
+## Implantação em produção
+- Front end web: Vercel
+
+# Autor
+
+Bruno Guimarães de Paula
+
+https://www.linkedin.com/in/brunoguimaraes-p/
+
