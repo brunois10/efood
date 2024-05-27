@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const ContainerDelivery = styled.div`
   display: none;
@@ -32,6 +32,10 @@ export const InputGroup = styled.div`
     border: none;
     color: #4b4b4b;
     margin-top: 8px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      margin-right: 60px;
+    }
   }
 `
 export const ContainerButton = styled.div`
@@ -55,6 +59,10 @@ export const ButtonCart = styled.button`
   font-size: 14px;
   line-height: 16.41px;
   width: 344px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 284px;
+  }
 `
 export const ContainerPayment = styled.div`
   display: none;
@@ -92,4 +100,8 @@ export const ButtonCheckout = styled.button`
   font-size: 14px;
   line-height: 16.41px;
   width: 344px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 284px;
+  }
 `
