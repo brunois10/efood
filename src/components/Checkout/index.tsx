@@ -215,7 +215,7 @@ const Checkout = () => {
               </InputGroup>
               <InputGroup>
                 <label htmlFor="zipCode">CEP</label>
-                <input
+                <InputMask
                   type="text"
                   required
                   id="zipCode"
@@ -224,6 +224,7 @@ const Checkout = () => {
                   onBlur={form.handleBlur}
                   value={form.values.zipCode}
                   className={checkInputHasError('zipCode') ? 'error' : ''}
+                  mask="99999-999"
                 />
               </InputGroup>
               <InputGroup>

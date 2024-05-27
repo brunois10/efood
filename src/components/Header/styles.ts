@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Fundo = styled.div`
   width: 100%;
@@ -29,6 +29,10 @@ export const Texto = styled.h2`
   text-align: center;
   color: ${cores.vermelho};
   margin-bottom: 40px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-bottom: 120px;
+  }
 `
 export const Container = styled.div`
   max-width: 539px;

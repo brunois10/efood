@@ -6,10 +6,11 @@ export const formataPreco = (preco = 0) => {
 }
 
 export const getTotalPrice = (items: CardapioType[]) => {
-  return items.reduce((accumulator, currentItem) => {
+  const total = items.reduce((accumulator, currentItem) => {
     if (currentItem.preco) {
-      return (accumulator += currentItem.preco)
+      return accumulator + currentItem.preco
     }
-    return 0
+    return accumulator
   }, 0)
+  return total.toFixed(2)
 }
