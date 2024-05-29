@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -18,6 +18,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
   const [userAdress, setUserAdress] = useState(false)
   const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
+  const navigate = useNavigate()
 
   const form = useFormik({
     initialValues: {
@@ -116,7 +117,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
   }
 
   if (items.length === 0) {
-    return <Navigate to="/" />
+    return navigate('/')
   }
 
   return !isSuccess ? (
