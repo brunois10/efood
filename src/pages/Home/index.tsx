@@ -5,7 +5,7 @@ import Loader from '../../components/Loader'
 import { useGetRestaurantesQuery } from '../../services/api'
 
 const Home = () => {
-  const { data: restaurants } = useGetRestaurantesQuery()
+  const { data: restaurants, isLoading } = useGetRestaurantesQuery()
 
   if (restaurants) {
     return (
@@ -15,7 +15,9 @@ const Home = () => {
       </>
     )
   }
-  return <Loader />
+  if (isLoading) {
+    return <Loader />
+  }
 }
 
 export default Home
