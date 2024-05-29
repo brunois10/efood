@@ -14,7 +14,7 @@ type PurchasePayload = {
       city: string
       zipCode: string
       number: number
-      complement?: string
+      complement: string
     }
   }
   payment: {
@@ -42,7 +42,7 @@ const api = createApi({
     getRestaurantes: builder.query<restauranteData[], void>({
       query: () => 'restaurantes',
     }),
-    getRestauranteId: builder.query<restauranteData, string>({
+    getRestaurante: builder.query<restauranteData, string>({
       query: (id) => `restaurantes/${id}`,
     }),
     purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
@@ -57,7 +57,7 @@ const api = createApi({
 
 export const {
   useGetRestaurantesQuery,
-  useGetRestauranteIdQuery,
+  useGetRestauranteQuery,
   usePurchaseMutation,
 } = api
 

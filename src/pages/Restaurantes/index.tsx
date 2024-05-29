@@ -3,7 +3,7 @@ import HeaderPerfil from '../../components/HeaderPerfil'
 import Banner from '../../components/Banner'
 
 import { useParams } from 'react-router-dom'
-import { useGetRestauranteIdQuery } from '../../services/api'
+import { useGetRestauranteQuery } from '../../services/api'
 import Loader from '../../components/Loader'
 
 type RestauratsParams = {
@@ -12,7 +12,7 @@ type RestauratsParams = {
 
 const Restaurantes = () => {
   const { id } = useParams() as RestauratsParams
-  const { data: restaurantsID } = useGetRestauranteIdQuery(id)
+  const { data: restaurantsID } = useGetRestauranteQuery(id)
 
   if (restaurantsID) {
     return (
