@@ -20,6 +20,10 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
   const { items } = useSelector((state: RootReducer) => state.cart)
   const navigate = useNavigate()
 
+  const handleCompleteOrder = () => {
+    navigate('/')
+  }
+
   const form = useFormik({
     initialValues: {
       adress: '',
@@ -274,7 +278,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
       )}
     </CheckoutContainer>
   ) : (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleCompleteOrder}>
       <h3>Pedido Realizado - {data?.orderId}</h3>
       <p>
         Estamos felizes em informar que seu pedido já está em processo de
