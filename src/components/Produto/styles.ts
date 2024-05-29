@@ -98,3 +98,12 @@ export const Botao = styled.button`
   margin: 16px 8px 8px 8px;
   cursor: pointer;
 `
+export const Button = styled.button`
+  color: ${cores.vermelho};
+  padding: 4px;
+  background-color: ${cores.bege};
+  font-weight: bold;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+`

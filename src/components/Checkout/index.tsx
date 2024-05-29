@@ -1,126 +1,80 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import {
-  returnCart,
-  paymentCart,
-  returnCheckout,
-  finishCheckout,
-  clear,
-  close,
-} from '../../store/reducers/cart'
-
-import {
-  ButtonCart,
-  ButtonCheckout,
-  ContainerButton,
-  ContainerCheckout,
-  ContainerDelivery,
-  ContainerPayment,
-  InputGroup,
-  Title,
-} from './styles'
 import { RootReducer } from '../../store'
+import { Navigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+
 import { usePurchaseMutation } from '../../services/api'
+
 import InputMask from 'react-input-mask'
+
+import { Button } from '../Produto/styles'
+import { CheckoutContainer, InputGroup } from './styles'
 import { getTotalPrice } from '../../utils'
 
-const Checkout = () => {
-  const { isPayment, items, isFinish } = useSelector(
-    (state: RootReducer) => state.cart,
-  )
-  const navigate = useNavigate()
-
-  const [purchase, { data }] = usePurchaseMutation()
-
-  const finish = () => {
-    dispatch(clear())
-    dispatch(close())
-    navigate('/')
-  }
-
-  const dispatch = useDispatch()
-
-  const backCart = () => {
-    dispatch(returnCart())
-  }
-
-  const activePayment = () => {
-    if (
-      form.values.receiver &&
-      form.values.adress &&
-      form.values.city &&
-      form.values.zipCode &&
-      form.values.number
-    ) {
-      dispatch(paymentCart())
-    } else {
-      alert('Preencha antes os dados obrigatórios!')
-    }
-  }
-
-  const activeConfirmed = () => {
-    if (
-      form.values.cardName &&
-      form.values.cardNumber &&
-      form.values.cardCode &&
-      form.values.expiresYear &&
-      form.values.expiresMonth
-    ) {
-      dispatch(finishCheckout())
-    } else {
-      alert('Preencha antes os dados obrigatórios!')
-    }
-  }
-
-  const returnAdress = () => {
-    dispatch(returnCheckout())
-  }
+const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
+  const [userAdress, setUserAdress] = useState(false)
+  const [purchase, { isSuccess, data, isLoading }] = usePurchaseMutation()
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
   const form = useFormik({
     initialValues: {
-      receiver: '',
       adress: '',
       city: '',
-      zipCode: '',
+      cep: '',
       number: '',
-      complement: '',
-      cardName: '',
-      cardNumber: '',
+      adressComplement: '',
+      nameOwner: '',
+      numberOwner: '',
       cardCode: '',
       expiresMonth: '',
       expiresYear: '',
     },
     validationSchema: Yup.object({
-      receiver: Yup.string().required('O campo é obrigatório'),
-      adress: Yup.string().required('O campo é obrigatório'),
-      city: Yup.string().required('O campo é obrigatório'),
-      zipCode: Yup.string().required('O campo é obrigatório'),
-      number: Yup.string().required('O campo é obrigatório'),
-      cardName: Yup.string().required('O campo é obrigatório'),
-      cardNumber: Yup.string().required('O campo é obrigatório'),
-      cardCode: Yup.string().required('O campo é obrigatório'),
-      expiresMonth: Yup.string().required('O campo é obrigatório'),
-      expiresYear: Yup.string().required('O campo é obrigatório'),
+      adress: Yup.string()
+        .min(5, 'Endereço inválido!')
+        .required('Campo obrigatório!'),
+      city: Yup.string()
+        .min(5, 'Cidade inválida!')
+        .required('Campo obrigatório!'),
+      cep: Yup.string().min(5, 'Cep inválido!').required('Campo obrigatório!'),
+      number: Yup.string()
+        .min(1, 'Número inválido')
+        .required('Campo obrigatório!'),
+      nameOwner: Yup.string()
+        .min(5, 'Nome inválido')
+        .required('Campo obrigatório!'),
+      numberOwner: Yup.string()
+        .min(16, 'Cartão inválido')
+        .required('Campo obrigatório!'),
+      cardCode: Yup.string()
+        .min(2, 'CVV inválido!')
+        .required('Campo obrigatório!'),
+      expiresMonth: Yup.string()
+        .min(2, 'Mês inválido!')
+        .required('Campo obrigatório!'),
+      expiresYear: Yup.string()
+        .min(2, 'Ano inválido')
+        .required('Campo obrigatório!'),
     }),
     onSubmit: (values) => {
       purchase({
         delivery: {
-          receiver: values.receiver,
+          receiver: values.nameOwner,
           adress: {
             description: values.adress,
             city: values.city,
-            zipCode: values.zipCode,
+            zipCode: values.cep,
             number: Number(values.number),
-            complement: values.complement,
+            complement: values.adressComplement,
           },
         },
         payment: {
           card: {
-            name: values.cardName,
-            number: values.cardNumber,
+            name: values.nameOwner,
+            number: values.numberOwner,
             code: Number(values.cardCode),
             expires: {
               month: Number(values.expiresMonth),
@@ -128,15 +82,32 @@ const Checkout = () => {
             },
           },
         },
-        products: items.map((item) => ({
-          id: item.id,
-          price: item.preco as number,
-        })),
+        products: [
+          {
+            id: 1,
+            price: 10,
+          },
+        ],
       })
     },
   })
 
-  const checkInputHasError = (fieldName: string) => {
+  const fromAdressIsValid = () => {
+    const isValid =
+      !form.errors.adress &&
+      !form.errors.city &&
+      !form.errors.cep &&
+      !form.errors.number &&
+      form.touched.adress
+
+    if (isValid) {
+      setUserAdress(true)
+    } else {
+      alert('Preencha os dados de entrega corretamente!')
+    }
+  }
+
+  const checkoutInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
     const hasError = isTouched && isInvalid
@@ -144,209 +115,184 @@ const Checkout = () => {
     return hasError
   }
 
-  return (
-    <>
-      {isFinish && (
-        <ContainerCheckout className="is-finish">
-          <Title>Pedido realizado - {data?.orderId}</Title>
-          <p>
-            Estamos felizes em informar que seu pedido já está em processo de
-            preparação e, em breve, será entregue no endereço fornecido.
-          </p>
-          <p>
-            Gostaríamos de ressaltar que nossos entregadores não estão
-            autorizados a realizar cobranças extras.
-          </p>
-          <p>
-            Lembre-se da importância de higienizar as mãos após o recebimento do
-            pedido, garantindo assim sua segurança e bem-estar durante a
-            refeição.
-          </p>
-          <p>
-            Esperamos que desfrute de uma deliciosa e agradável experiência
-            gastronômica. Bom apetite!
-          </p>
-          <ButtonCheckout onClick={finish}>Concluir</ButtonCheckout>
-        </ContainerCheckout>
-      )}
-      <form onSubmit={form.handleSubmit}>
-        {!isPayment && !isFinish && (
-          <>
-            <ContainerDelivery className="is-checkout">
-              <Title>Entrega</Title>
-              <InputGroup>
-                <label htmlFor="receiver">Quem irá receber</label>
-                <input
-                  type="text"
-                  required
-                  id="receiver"
-                  name="receiver"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.receiver}
-                  className={checkInputHasError('receiver') ? 'error' : ''}
-                />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="adress">Endereço</label>
-                <input
-                  type="text"
-                  required
-                  id="adress"
-                  name="adress"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.adress}
-                  className={checkInputHasError('adress') ? 'error' : ''}
-                />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="city">Cidade</label>
-                <input
-                  type="text"
-                  required
-                  id="city"
-                  name="city"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.city}
-                  className={checkInputHasError('city') ? 'error' : ''}
-                />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="zipCode">CEP</label>
-                <InputMask
-                  type="text"
-                  required
-                  id="zipCode"
-                  name="zipCode"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.zipCode}
-                  className={checkInputHasError('zipCode') ? 'error' : ''}
-                  mask="99999-999"
-                />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="number">Número</label>
-                <input
-                  type="number"
-                  required
-                  id="number"
-                  name="number"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.number}
-                  className={checkInputHasError('number') ? 'error' : ''}
-                />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="complement">Complemento (opcional)</label>
-                <input
-                  type="text"
-                  required
-                  id="complement"
-                  name="complement"
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  value={form.values.complement}
-                />
-              </InputGroup>
-              <ContainerButton>
-                <ButtonCart type="submit" onClick={activePayment}>
-                  Continuar com o pagamento
-                </ButtonCart>
-                <ButtonCart onClick={backCart}>
-                  Voltar para o carrinho
-                </ButtonCart>
-              </ContainerButton>
-            </ContainerDelivery>
-          </>
-        )}
-        {isPayment && (
-          <ContainerPayment className="is-payment">
-            <Title>Pagamento - Valor a pagar R$ {getTotalPrice(items)}</Title>
+  if (items.length === 0) {
+    return <Navigate to="/" />
+  }
+
+  return !isSuccess ? (
+    <CheckoutContainer onSubmit={form.handleSubmit}>
+      {userAdress ? (
+        <>
+          <h3>Pagamento - Valor a pagar R$ {getTotalPrice(items)}</h3>
+          <InputGroup>
+            <label htmlFor="nameOwner">Nome no cartão</label>
+            <input
+              id="nameOwner"
+              type="text"
+              value={form.values.nameOwner}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+              className={checkoutInputHasError('nameOwner') ? 'error' : ''}
+            />
+          </InputGroup>
+          <div className="d-flex">
             <InputGroup>
-              <label htmlFor="cardName">Nome no cartão</label>
-              <input
-                type="text"
-                required
-                id="cardName"
-                name="cardName"
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                value={form.values.cardName}
-                className={checkInputHasError('cardName') ? 'error' : ''}
-              />
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="cardNumber">Número do cartão</label>
+              <label htmlFor="numberOwner">Número do cartão</label>
               <InputMask
+                id="numberOwner"
                 type="text"
-                required
-                id="cardNumber"
-                name="cardNumber"
+                value={form.values.numberOwner}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
-                value={form.values.cardNumber}
-                className={checkInputHasError('cardNumber') ? 'error' : ''}
+                className={checkoutInputHasError('numberOwner') ? 'error' : ''}
                 mask="9999 9999 9999 9999"
               />
             </InputGroup>
-            <InputGroup>
+            <InputGroup maxWidth="87px">
               <label htmlFor="cardCode">CVV</label>
               <InputMask
-                type="text"
-                required
                 id="cardCode"
-                name="cardCode"
+                type="text"
+                value={form.values.cardCode}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
-                value={form.values.cardCode}
-                className={checkInputHasError('cardCode') ? 'error' : ''}
+                className={checkoutInputHasError('cardCode') ? 'error' : ''}
                 mask="999"
               />
             </InputGroup>
+          </div>
+          <div className="d-flex">
             <InputGroup>
               <label htmlFor="expiresMonth">Mês de vencimento</label>
               <InputMask
-                type="text"
-                required
                 id="expiresMonth"
-                name="expiresMonth"
+                type="text"
+                value={form.values.expiresMonth}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
-                value={form.values.expiresMonth}
-                className={checkInputHasError('expiresMonth') ? 'error' : ''}
+                className={checkoutInputHasError('expiresMonth') ? 'error' : ''}
                 mask="99"
               />
             </InputGroup>
             <InputGroup>
               <label htmlFor="expiresYear">Ano de vencimento</label>
               <InputMask
-                type="text"
-                required
                 id="expiresYear"
-                name="expiresYear"
+                type="text"
+                value={form.values.expiresYear}
                 onChange={form.handleChange}
                 onBlur={form.handleBlur}
-                value={form.values.expiresYear}
-                className={checkInputHasError('expiresYear') ? 'error' : ''}
+                className={checkoutInputHasError('expiresYear') ? 'error' : ''}
                 mask="99"
               />
             </InputGroup>
-            <ContainerButton>
-              <ButtonCart type="submit" onClick={activeConfirmed}>
-                Finalizar pagamento
-              </ButtonCart>
-              <ButtonCart onClick={returnAdress}>
-                Voltar para a edição de endereço
-              </ButtonCart>
-            </ContainerButton>
-          </ContainerPayment>
-        )}
-      </form>
-    </>
+          </div>
+          <div className="button-container">
+            <Button type="submit">
+              {isLoading ? 'Finalizando compra...' : 'Finalizar pagamento'}
+            </Button>
+            <Button onClick={() => setUserAdress(false)}>
+              Voltar para edição de endereço
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          <h3>Entrega</h3>
+          <InputGroup>
+            <label htmlFor="adress">Endereço</label>
+            <input
+              id="adress"
+              type="text"
+              name="adress"
+              value={form.values.adress}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+              className={checkoutInputHasError('adress') ? 'error' : ''}
+            />
+          </InputGroup>
+          <InputGroup>
+            <label htmlFor="city">Cidade</label>
+            <input
+              id="city"
+              type="text"
+              name="city"
+              value={form.values.city}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+              className={checkoutInputHasError('city') ? 'error' : ''}
+            />
+          </InputGroup>
+          <div className="d-flex">
+            <InputGroup>
+              <label htmlFor="cep">CEP</label>
+              <InputMask
+                id="cep"
+                type="text"
+                name="cep"
+                value={form.values.cep}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                className={checkoutInputHasError('cep') ? 'error' : ''}
+                mask="99999-999"
+              />
+            </InputGroup>
+            <InputGroup>
+              <label htmlFor="number">Número</label>
+              <input
+                id="number"
+                type="text"
+                name="number"
+                value={form.values.number}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+                className={checkoutInputHasError('number') ? 'error' : ''}
+              />
+            </InputGroup>
+          </div>
+          <InputGroup>
+            <label htmlFor="adressComplement">Complemento (opcional)</label>
+            <input
+              id="adressComplement"
+              type="text"
+              name="adressComplement"
+              value={form.values.adressComplement}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+            />
+          </InputGroup>
+          <div className="button-container">
+            <Button onClick={() => fromAdressIsValid()}>
+              Continuar com o pagamento
+            </Button>
+            <Button onClick={() => setPayment(false)}>
+              Voltar para o carrinho
+            </Button>
+          </div>
+        </>
+      )}
+    </CheckoutContainer>
+  ) : (
+    <CheckoutContainer>
+      <h3>Pedido Realizado - {data?.orderId}</h3>
+      <p>
+        Estamos felizes em informar que seu pedido já está em processo de
+        preparação e, em breve, será entregue no endereço fornecido.
+      </p>
+      <p>
+        Gostaríamos de ressaltar que nossos entregadores não estão autorizados a
+        realizar cobranças extras.
+      </p>
+      <p>
+        Lembre-se da importância de higienizar as mãos após o recebimento do
+        pedido, garantindo assim sua segurança e bem-estar durante a refeição.
+      </p>
+      <p>
+        Esperamos que desfrute de uma deliciosa e agradável experiência
+        gastronômica. Bom apetite!
+      </p>
+      <Button>Concluir</Button>
+    </CheckoutContainer>
   )
 }
 

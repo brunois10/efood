@@ -1,39 +1,23 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 import { RootReducer } from '../../store'
-import { checkout, close, remove } from '../../store/reducers/cart'
 
-import {
-  ButtonTrash,
-  BuyButton,
-  Card,
-  CartBuy,
-  CartContainer,
-  Description,
-  ImageFood,
-  Overlay,
-  Prices,
-  SideBar,
-  Teste,
-  VoidCart,
-} from './styles'
+import { getTotalPrice, parseToBrl } from '../../utils'
+import { close, remove } from '../../store/reducers/cart'
 
-import { getTotalPrice } from '../../utils'
-import Trash from '../../assets/images/lixo.png'
+import * as S from './styles'
+import { Button } from '../Produto/styles'
 import Checkout from '../Checkout'
+import lixo from '../../assets/images/lixo.png'
 
 const Cart = () => {
-  const { isOpen, items, isCheckout } = useSelector(
-    (state: RootReducer) => state.cart,
-  )
-
+  const [payment, setPayment] = useState(false)
   const dispatch = useDispatch()
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
 
   const closeCart = () => {
     dispatch(close())
-  }
-
-  const startCheckout = () => {
-    dispatch(checkout())
   }
 
   const removeItem = (id: number) => {
@@ -41,46 +25,41 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <SideBar>
-        {items.length > 0 ? (
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
+        {!payment ? (
           <>
-            <CartBuy className={isCheckout ? 'is-cartbuy' : ''}>
-              <Teste>
-                {items.map((item, key) => (
-                  <Card key={key}>
-                    <ImageFood src={item.foto} alt={item.nome} />
-                    <Description>
-                      <h3>{item.nome}</h3>
-                      <span>R$ {item.preco}</span>
-                    </Description>
-                    <ButtonTrash
-                      onClick={() => removeItem(item.id)}
-                      src={Trash}
-                      alt="Lixo"
-                    />
-                  </Card>
-                ))}
-              </Teste>
-              <Prices>
-                <p>Valor total</p>
-                <p>R$ {getTotalPrice(items)}</p>
-              </Prices>
-              <BuyButton onClick={startCheckout}>
-                Continuar com a entrega
-              </BuyButton>
-            </CartBuy>
-            {isCheckout && <Checkout />}
+            <ul>
+              {items.map((item) => (
+                <S.CartItem key={item.id}>
+                  <img src={item.foto} alt="img do prato" />
+                  <div>
+                    <h3>{item.nome}</h3>
+                    <p>{parseToBrl(item.preco)}</p>
+                  </div>
+                  <img
+                    onClick={() => removeItem(item.id)}
+                    className="button-img"
+                    src={lixo}
+                    alt="lixo"
+                  />
+                </S.CartItem>
+              ))}
+            </ul>
+            <S.OrderBox>
+              <h4>Valor Total</h4>
+              <p>{parseToBrl(getTotalPrice(items))}</p>
+            </S.OrderBox>
+            <Button onClick={() => setPayment(true)}>
+              Continuar com a entrega
+            </Button>
           </>
         ) : (
-          <VoidCart>
-            O carrinho está vazio, adicione pelo menos um produto para continuar
-            com a compra
-          </VoidCart>
+          <Checkout setPayment={setPayment} />
         )}
-      </SideBar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

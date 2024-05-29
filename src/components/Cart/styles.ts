@@ -1,5 +1,16 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { cores } from '../../styles'
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.7;
+  z-index: 1;
+`
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -16,150 +27,57 @@ export const CartContainer = styled.div`
   }
 `
 
-export const Teste = styled.div`
-  max-height: 380px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-`
-
-export const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: 0.8;
+export const Sidebar = styled.aside`
+  background-color: ${cores.vermelho};
   z-index: 1;
-`
-
-export const SideBar = styled.aside`
-  z-index: 1;
-  padding: 32px 0px 16px 8px;
+  padding: 40px 16px 0 16px;
   max-width: 360px;
   width: 100%;
-  background-color: ${cores.vermelho};
-  height: 100%;
+  color: ${cores.vermelho};
 
-  @media (max-width: ${breakpoints.desktop}) {
-    width: 300px;
+  @media (max-width: 376px) {
+    max-width: 75%;
   }
 `
 
-export const Card = styled.li`
-  max-width: 344px;
-  width: 100%;
-  max-height: 100px;
-  height: 100%;
+export const CartItem = styled.li`
   display: flex;
+  padding: 8px 8px;
+  position: relative;
   background-color: ${cores.bege};
   margin-bottom: 16px;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    width: 280px;
-    max-height: 350px;
+  img {
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    margin-right: 24px;
   }
-
-  button {
-    width: 16px;
-    height: 16px;
-  }
-`
-
-export const ImageFood = styled.img`
-  width: 80px;
-  height: 80px;
-  margin: 8px 8px 12px 8px;
-  object-fit: cover;
-`
-export const Description = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${cores.vermelho};
-  margin-top: 8px;
 
   h3 {
-    width: 224px;
-    font-size: 18px;
-    line-height: 21px;
-    text-align: start;
-    font-weight: 900;
+    font-weight: bold;
+    font-size: 16px;
     margin-bottom: 16px;
-
-    @media (max-width: ${breakpoints.desktop}) {
-      font-size: 14px;
-      width: 150px;
-    }
   }
 
-  span {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 22px;
-
-    @media (max-width: ${breakpoints.desktop}) {
-      font-size: 10px;
-    }
+  .button-img {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    bottom: 0;
+    right: 0;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
   }
 `
 
-export const Prices = styled.div`
+export const OrderBox = styled.div`
+  color: ${cores.bege};
   display: flex;
   justify-content: space-between;
-  padding: 24px 8px 16px 0;
-  color: ${cores.bege};
-
-  @media (max-width: ${breakpoints.desktop}) {
-    padding-right: 16px;
-  }
-
-  p {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 16px;
-    text-align: start;
-  }
-`
-export const ButtonTrash = styled.img`
-  width: 16px;
-  height: 16px;
-  margin: 76px 8px 8px 0px;
-  cursor: pointer;
-
-  @media (max-width: ${breakpoints.desktop}) {
-    margin: 10px;
-  }
-`
-
-export const BuyButton = styled.button`
-  max-width: 344px;
-  height: 24px;
-  width: 100%;
-  border: none;
-  cursor: pointer;
   font-size: 14px;
-  font-weight: 700;
-  line-height: 16px;
-  text-align: center;
-  background-color: ${cores.bege};
-  color: ${cores.vermelho};
-
-  @media (max-width: ${breakpoints.desktop}) {
-    width: 280px;
-  }
-`
-export const VoidCart = styled.p`
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 16px;
-  text-align: start;
-  color: ${cores.bege};
-`
-export const CartBuy = styled.div`
-  display: block;
-
-  &.is-cartbuy {
-    display: none;
-  }
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 16px;
 `

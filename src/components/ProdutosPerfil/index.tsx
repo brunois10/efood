@@ -17,7 +17,7 @@ import close from '../../assets/images/fechar.png'
 
 import { add, open } from '../../store/reducers/cart'
 import { useDispatch } from 'react-redux'
-import { formataPreco } from '../../utils'
+import { parseToBrl } from '../../utils'
 
 type Props = {
   id: number
@@ -79,7 +79,7 @@ const ProdutoPerfil = ({
                 handleModal()
               }}
             >
-              Adicionar ao carrinho - {formataPreco(preco)}
+              Adicionar ao carrinho - {parseToBrl(preco)}
             </button>
           </TextBox>
         </ModalContent>
