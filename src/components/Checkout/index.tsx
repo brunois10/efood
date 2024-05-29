@@ -117,7 +117,7 @@ const Checkout = ({ setPayment }: { setPayment: (value: boolean) => void }) => {
   }
 
   if (items.length === 0) {
-    return navigate('/')
+    navigate('/')
   }
 
   return !isSuccess ? (
