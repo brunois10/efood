@@ -42,4 +42,8 @@ export const NomeRestaurante = styled.h4`
   font-size: 32px;
   line-height: 38px;
   font-weight: 900;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 26px;
+  }
 `
