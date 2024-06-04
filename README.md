@@ -5,7 +5,7 @@
 
 https://efood-liart-six.vercel.app
 
-Efood é uma aplicação front-end e mobile desenvolvida como projeto final do front-end do curso profissionalizante de Full Stack da EBAC. Esta aplicação permite aos usuários pesquisar restaurantes, cujos dados são obtidos a partir de uma API.
+Efood é uma aplicação front-end desenvolvida como projeto final do front-end do curso profissionalizante de Full Stack da EBAC. Esta aplicação permite aos usuários pesquisar restaurantes, cujos dados são obtidos a partir de uma API.
 
 Principais funcionalidades:
 
